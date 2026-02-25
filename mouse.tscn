@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://buxttjd23un5a"]
+
+[sub_resource type="GDScript" id="GDScript_w3dyj"]
+script/source = "extends Node
+
+var arrow = load(\"res://art/scoop-boba.png\")
+
+#func _ready():
+	#var img = arrow.get_image()
+	#var small_texture = ImageTexture.create_from_image(img)
+	#Input.set_custom_mouse_cursor(small_texture, Input.CURSOR_ARROW)
+"
+
+[node name="Mouse" type="Node"]
+script = SubResource("GDScript_w3dyj")

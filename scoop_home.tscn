@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://jkmymv51iir3"]
+
+[ext_resource type="Texture2D" uid="uid://cs0lta1l2yl43" path="res://art/scoop-empty.png" id="1_dakfp"]
+[ext_resource type="Script" uid="uid://ddnci0f2plsd0" path="res://scoop_home_sprite.gd" id="2_jacfw"]
+
+[node name="ScoopHome" type="Node2D"]
+
+[node name="ScoopHomeSprite2" type="Sprite2D" parent="."]
+modulate = Color(0.262932, 0.262932, 0.262932, 1)
+texture = ExtResource("1_dakfp")
+
+[node name="ScoopHomeSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_dakfp")
+script = ExtResource("2_jacfw")

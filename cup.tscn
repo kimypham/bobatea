@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://vlmr0j1ad5u8"]
+
+[ext_resource type="Script" uid="uid://b2andkwlt5yfk" path="res://cup.gd" id="1_358bg"]
+[ext_resource type="Texture2D" uid="uid://dwe111w86k0ig" path="res://art/cup-empty.png" id="1_ponjl"]
+[ext_resource type="Script" uid="uid://vha74w1et0b0" path="res://hitbox.gd" id="3_q1s7v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxhe5"]
+size = Vector2(133, 368)
+
+[node name="Cup" type="Node2D"]
+script = ExtResource("1_358bg")
+
+[node name="EmptyCupSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_ponjl")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0.5, -33.5)
+script = ExtResource("3_q1s7v")
+
+[node name="CupHitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -69.5)
+shape = SubResource("RectangleShape2D_hxhe5")
+
+[connection signal="clicked" from="Hitbox" to="EmptyCupSprite" method="_on_hitbox_clicked"]

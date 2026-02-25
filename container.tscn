@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4wqtd8g2jel5"]
+
+[ext_resource type="Texture2D" uid="uid://88gsgcthaibl" path="res://art/container-boba.png" id="1_d0xxp"]
+[ext_resource type="Script" uid="uid://3ooqpdkb7cxm" path="res://boba_container_sprite.gd" id="2_knnee"]
+
+[node name="Container" type="Area2D"]
+
+[node name="BobaContainerSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_d0xxp")
+script = ExtResource("2_knnee")

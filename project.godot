@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="bobatea"
+run/main_scene="uid://dneyoanlmecqq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ToolManager="*res://tool_manager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [rendering]
 
