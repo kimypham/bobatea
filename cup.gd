@@ -22,15 +22,20 @@ func _process(delta):
 
 # Called when player clicks the cup hitbox
 func _on_cup_hitbox_clicked() -> void:
-	if ToolManager.current_tool == ToolManager.Tool.NONE:
-		# No scoop → start dragging
-		is_dragging = true
-		mouse_offset = get_global_mouse_position() - global_position
-		
-	elif ToolManager.current_tool == ToolManager.Tool.SCOOP:
-		# Scoop active → change cursor & cup sprite, no dragging
-		ToolManager.scoop_press()
-		sprite.texture = cup_boba
+	var current_scoop = ToolManager.get_current_scoop()
+	
+	match current_scoop:
+		ToolManager.Tool.NONE:
+			# No scoop → start dragging
+			is_dragging = true
+			mouse_offset = get_global_mouse_position() - global_position
+		ToolManager.Tool.SCOOP:
+			# Scoop active → change cursor & cup sprite, no dragging
+			ToolManager.scoop_press()
+		ToolManager.Tool.SCOOP_BOBA:
+			# Scoop active → change cursor & cup sprite, no dragging
+			ToolManager.scoop_press()
+			sprite.texture = cup_boba
 
 
 func _unhandled_input(event):
@@ -40,5 +45,6 @@ func _unhandled_input(event):
 			is_dragging = false
 
 		# Always release scoop cursor if scoop tool is active
-		if ToolManager.current_tool == ToolManager.Tool.SCOOP:
+		var current_tool = ToolManager.current_tool
+		if current_tool == ToolManager.Tool.SCOOP || current_tool == ToolManager.Tool.SCOOP_BOBA:
 			ToolManager.scoop_release()
