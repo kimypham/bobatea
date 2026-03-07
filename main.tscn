@@ -23,4 +23,5 @@ position = Vector2(248, 552)
 position = Vector2(410, 550)
 
 [node name="ScoopHome" parent="." instance=ExtResource("5_lquwl")]
+visible = false
 position = Vector2(885, 303)
