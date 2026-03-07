@@ -28,11 +28,15 @@ func _on_window_resized():
 			set_scaled_cursor(scoop_rotate, hotspot)
 			
 func set_scaled_cursor(image: Texture2D, hotspot: Vector2 = Vector2.ZERO):
-	var base_size = Vector2(1152, 648)
+	var content_scale = DisplayServer.screen_get_scale()  # e.g. 2.0 on HiDPI
 	var window_size = Vector2(DisplayServer.window_get_size())
-	var uniform_scale = min(window_size.x / base_size.x, window_size.y / base_size.y)
+	var viewport_size = Vector2(1152, 648)
 	
-	var cursor_scale = uniform_scale * 0.5
+	# How much the window differs from your base viewport
+	var window_scale = min(window_size.x / viewport_size.x, window_size.y / viewport_size.y)
+	
+	# Cursor needs to be divided by content_scale to counteract OS scaling
+	var cursor_scale = window_scale / content_scale
 	
 	var img = image.get_image()
 	img.convert(Image.FORMAT_RGBA8)
@@ -42,8 +46,7 @@ func set_scaled_cursor(image: Texture2D, hotspot: Vector2 = Vector2.ZERO):
 	img.resize(new_w, new_h, Image.INTERPOLATE_NEAREST)
 	
 	var new_texture = ImageTexture.create_from_image(img)
-	var scaled_hotspot = hotspot * cursor_scale
-	Input.set_custom_mouse_cursor(new_texture, Input.CURSOR_ARROW, scaled_hotspot)
+	Input.set_custom_mouse_cursor(new_texture, Input.CURSOR_ARROW, hotspot * cursor_scale)
 	
 func get_current_scoop() -> Tool:
 	return current_tool
