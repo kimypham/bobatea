@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dneyoanlmecqq"]
+[gd_scene load_steps=6 format=3 uid="uid://dneyoanlmecqq"]
 
 [ext_resource type="PackedScene" uid="uid://vlmr0j1ad5u8" path="res://cup.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://c4wqtd8g2jel5" path="res://container.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://dlsj4u6utq02v" path="res://tool_manager.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://clg65vd208ch1" path="res://shaker.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://jkmymv51iir3" path="res://scoop_home.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node"]
@@ -25,3 +26,10 @@ position = Vector2(410, 550)
 [node name="ScoopHome" parent="." instance=ExtResource("5_lquwl")]
 visible = false
 position = Vector2(885, 303)
+
+[node name="Shaker" parent="." instance=ExtResource("5_272bh")]
+position = Vector2(425, 298)
+
+[node name="Shaker2" parent="." instance=ExtResource("5_272bh")]
+position = Vector2(576, 261)
+cup_size = "large"

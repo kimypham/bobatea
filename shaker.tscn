@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://clg65vd208ch1"]
+
+[ext_resource type="Script" uid="uid://dbu0h1tfhla21" path="res://shaker.gd" id="1_dkk0w"]
+[ext_resource type="Texture2D" uid="uid://pyam43rmmigv" path="res://art/shaker-small.png" id="1_tqtt2"]
+[ext_resource type="Script" uid="uid://vha74w1et0b0" path="res://hitbox.gd" id="2_kwwks"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dkk0w"]
+size = Vector2(149.5, 368)
+
+[node name="Shaker" type="Node2D"]
+script = ExtResource("1_dkk0w")
+
+[node name="ShakerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_tqtt2")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("2_kwwks")
+
+[node name="ShakerHitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0.25, -59)
+shape = SubResource("RectangleShape2D_dkk0w")
+
+[connection signal="clicked" from="Hitbox" to="." method="_on_hitbox_clicked"]
