@@ -8,8 +8,8 @@ enum Tool {
 
 var current_tool : Tool = Tool.NONE
 
-var scoop_with_boba = preload("res://art/scoop-boba.png")
-var scoop_rotate = preload("res://art/scoop-rotate.png")
+var scoop_with_boba = preload("res://art/scoop-boba-small.png")
+var scoop_rotate = preload("res://art/scoop-rotate-small.png")
 var scoop_empty = preload("res://art/scoop-empty.png")
 
 var hotspot = Vector2(50, 20)
