@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dneyoanlmecqq"]
+[gd_scene load_steps=7 format=3 uid="uid://dneyoanlmecqq"]
 
 [ext_resource type="PackedScene" uid="uid://vlmr0j1ad5u8" path="res://cup.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://c4wqtd8g2jel5" path="res://container.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://dlsj4u6utq02v" path="res://tool_manager.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://clg65vd208ch1" path="res://shaker.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://jkmymv51iir3" path="res://scoop_home.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bxxpx6twfulea" path="res://machine.tscn" id="6_7mycd"]
 
 [node name="Main" type="Node"]
 
@@ -12,6 +13,7 @@
 position = Vector2(753, 554)
 
 [node name="ContainerPearl" parent="." instance=ExtResource("2_0xm2m")]
+z_index = -1
 position = Vector2(933, 188)
 
 [node name="ToolManager" type="Node" parent="."]
@@ -27,13 +29,20 @@ position = Vector2(1069, 555)
 visible = false
 position = Vector2(885, 303)
 
-[node name="Shaker" parent="." instance=ExtResource("5_272bh")]
+[node name="Shaker" parent="." node_paths=PackedStringArray("snap_target") instance=ExtResource("5_272bh")]
 position = Vector2(94, 502)
+snap_target = NodePath("../Machine")
 
-[node name="ShakerLarge" parent="." instance=ExtResource("5_272bh")]
+[node name="ShakerLarge" parent="." node_paths=PackedStringArray("snap_target") instance=ExtResource("5_272bh")]
 position = Vector2(256, 478)
 shaker_size = "large"
+snap_target = NodePath("../Machine")
 
 [node name="ContainerIce" parent="." instance=ExtResource("2_0xm2m")]
+z_index = -1
 position = Vector2(249, 79)
 contains = "ice"
+
+[node name="Machine" parent="." instance=ExtResource("6_7mycd")]
+z_index = -1
+position = Vector2(587, 171)

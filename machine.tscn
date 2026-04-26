@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxxpx6twfulea"]
+
+[ext_resource type="Texture2D" uid="uid://rfd0gscp0clx" path="res://art/machine-main.png" id="1_6a4ke"]
+[ext_resource type="Script" uid="uid://uifvw7qk55x5" path="res://machine.gd" id="1_ioi8x"]
+[ext_resource type="Texture2D" uid="uid://bb2b1p2v2872x" path="res://art/machine-button-oolong.png" id="2_q015e"]
+[ext_resource type="Texture2D" uid="uid://ccjaksvccyt0g" path="res://art/machine-container-oolong.png" id="3_loq51"]
+[ext_resource type="Script" uid="uid://vha74w1et0b0" path="res://hitbox.gd" id="4_loq51"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioi8x"]
+size = Vector2(56, 61)
+
+[node name="Machine" type="Node2D"]
+script = ExtResource("1_ioi8x")
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_6a4ke")
+
+[node name="ButtonSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 13)
+texture = ExtResource("2_q015e")
+
+[node name="ContainerSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -95)
+texture = ExtResource("3_loq51")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 13)
+script = ExtResource("4_loq51")
+
+[node name="ButtonHitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_ioi8x")
+
+[node name="SnapPoint" type="Marker2D" parent="."]
+position = Vector2(1, 234)

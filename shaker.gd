@@ -34,6 +34,11 @@ var spacing_y = 20  # adjust to your sprite height
 const base_y_regular = 90     # starting Y position inside the cup (adjust to sit at the bottom)
 const base_y_large = 125
 
+@export var snap_target: Node2D = null
+var snap_radius := 80.0                  # how close before it snaps (pixels)
+var is_snapped := false
+
+
 func _ready():
 	var shape = hitbox_shape.shape.duplicate()
 	hitbox_shape.shape = shape
@@ -60,6 +65,10 @@ func _on_hitbox_clicked() -> void:
 			# No scoop → start dragging
 			is_dragging = true
 			#mouse_offset = get_global_mouse_position() - global_position
+
+			if is_snapped:
+				is_snapped = false   # unsnap
+				snap_target.is_occupied = false
 		ToolManager.Tool.SCOOP:
 			# Scoop active → change cursor & cup sprite, no dragging
 			ToolManager.scoop_press()
@@ -75,12 +84,24 @@ func _unhandled_input(event):
 		# Stop dragging if dragging
 		if is_dragging:
 			is_dragging = false
+			_try_snap()
 
 		# Always release scoop cursor if scoop tool is active
 		var current_tool = ToolManager.current_tool
 		if current_tool != ToolManager.Tool.NONE:
 			ToolManager.scoop_release()
 			
+func _try_snap():
+	if snap_target == null:
+		return
+	if snap_target.is_occupied:
+		return   # someone's already there
+	var snap_point = snap_target.get_node("SnapPoint").global_position
+	if global_position.distance_to(snap_point) <= snap_radius:
+		global_position = snap_point
+		is_snapped = true
+		snap_target.is_occupied = true
+
 func _add_scoop(ingredient: String):
 	if not ingredient_scenes.has(ingredient):
 		push_error("Unknown ingredient: " + ingredient)
