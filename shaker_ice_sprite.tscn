@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmltyjlqvjsg2"]
+
+[ext_resource type="Texture2D" uid="uid://dtylhhnmbgt3s" path="res://art/shaker-ice-sprite.png" id="1_gw06w"]
+
+[node name="ShakerIceSprite" type="Sprite2D"]
+texture = ExtResource("1_gw06w")

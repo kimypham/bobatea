@@ -10,7 +10,7 @@ const hitbox_size_medium: Vector2 = Vector2(145, 360)
 const hitbox_position_medium: Vector2 = Vector2(0, -50)
 
 const hitbox_size_large: Vector2 = Vector2(145, 370)
-const hitbox_psotion_large: Vector2 = Vector2(0, -25)
+const hitbox_position_large: Vector2 = Vector2(0, -25)
 const shaker_large_texture = preload("res://art/shaker-large.png")
 
 const shaker_small_ice_small = preload("res://art/shaker-small-ice-small.png")
@@ -23,6 +23,17 @@ const shaker_large_ice_large = preload("res://art/shaker-large-ice-large.png")
 const mouse_offset = Vector2.ZERO
 var is_dragging = false
 
+# --- Ingredient scenes ---
+var ingredient_scenes = {
+	"ice": preload("res://shaker_ice_sprite.tscn"),
+}
+
+var ingredient_scoops := {}  # tracks scoops per ingredient type
+
+var spacing_y = 20  # adjust to your sprite height
+const base_y_regular = 90     # starting Y position inside the cup (adjust to sit at the bottom)
+const base_y_large = 125
+
 func _ready():
 	var shape = hitbox_shape.shape.duplicate()
 	hitbox_shape.shape = shape
@@ -32,7 +43,7 @@ func _ready():
 			hitbox_shape.position = hitbox_position_medium
 		"large":
 			shape.size = hitbox_size_large
-			hitbox_shape.position = hitbox_psotion_large
+			hitbox_shape.position = hitbox_position_large
 			
 			sprite.texture = shaker_large_texture
 			
@@ -54,11 +65,7 @@ func _on_hitbox_clicked() -> void:
 			ToolManager.scoop_press()
 		ToolManager.Tool.SCOOP_ICE:
 			ToolManager.scoop_press()
-			match shaker_size:
-				"regular":
-					sprite.texture = shaker_small_ice_medium
-				"large":
-					sprite.texture = shaker_large_ice_medium
+			_add_scoop("ice")
 		#ToolManager.Tool.SCOOP_BOBA:
 			# Scoop active → change cursor & cup sprite, no dragging
 			#ToolManager.scoop_press()
@@ -73,3 +80,21 @@ func _unhandled_input(event):
 		var current_tool = ToolManager.current_tool
 		if current_tool != ToolManager.Tool.NONE:
 			ToolManager.scoop_release()
+			
+func _add_scoop(ingredient: String):
+	if not ingredient_scenes.has(ingredient):
+		push_error("Unknown ingredient: " + ingredient)
+		return
+	
+	var count = ingredient_scoops.get(ingredient, []).size()
+	var new_sprite = ingredient_scenes[ingredient].instantiate()
+	var base_y_based_on_size = base_y_regular
+	if shaker_size == "large":
+		base_y_based_on_size = base_y_large
+	new_sprite.position = Vector2(0, base_y_based_on_size - count * spacing_y)
+	add_child(new_sprite)
+	move_child(new_sprite, 0)
+	
+	if not ingredient_scoops.has(ingredient):
+		ingredient_scoops[ingredient] = []
+	ingredient_scoops[ingredient].append(new_sprite)

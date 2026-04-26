@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://be1gpqce3j2aj"]
+
+[ext_resource type="Texture2D" uid="uid://d4fp118ibh1kx" path="res://art/cup-boba-sprite.png" id="1_83dnf"]
+
+[node name="BottomBobaSprite" type="Sprite2D"]
+texture = ExtResource("1_83dnf")
