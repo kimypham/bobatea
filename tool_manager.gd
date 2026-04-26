@@ -3,12 +3,14 @@ extends Node
 enum Tool {
 	NONE,
 	SCOOP,
-	SCOOP_BOBA
+	SCOOP_BOBA,
+	SCOOP_ICE
 }
 
 var current_tool : Tool = Tool.NONE
 
 var scoop_with_boba = preload("res://art/scoop-boba-small.png")
+var scoop_with_ice_small = preload("res://art/scoop-ice-small.png")
 var scoop_rotate = preload("res://art/scoop-rotate-small.png")
 var scoop_empty = preload("res://art/scoop-empty.png")
 
@@ -24,6 +26,8 @@ func _on_window_resized():
 	match current_tool:
 		Tool.SCOOP_BOBA:
 			set_scaled_cursor(scoop_with_boba, hotspot)
+		Tool.SCOOP_ICE:
+			set_scaled_cursor(scoop_with_ice_small, hotspot)
 		Tool.SCOOP:
 			set_scaled_cursor(scoop_rotate, hotspot)
 			
@@ -65,15 +69,20 @@ func scoop_boba():
 	current_tool = Tool.SCOOP_BOBA
 	set_scaled_cursor(scoop_with_boba, hotspot)
 	pressing_cup = false  # reset
+	
+func scoop_ice():
+	current_tool = Tool.SCOOP_ICE
+	set_scaled_cursor(scoop_with_ice_small, hotspot)
+	pressing_cup = false  # reset
 
 func scoop_press():
-	if current_tool == Tool.SCOOP || current_tool == Tool.SCOOP_BOBA:
+	if current_tool != Tool.NONE:
 		set_scaled_cursor(scoop_rotate, hotspot)
 		pressing_cup = true
 
 
 func scoop_release():
-	if (current_tool == Tool.SCOOP || current_tool == Tool.SCOOP_BOBA) and pressing_cup:
+	if current_tool != Tool.NONE and pressing_cup:
 		set_scaled_cursor(scoop_empty, hotspot)
 		pressing_cup = false
 		reset_cursor()

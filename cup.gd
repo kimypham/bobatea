@@ -46,5 +46,5 @@ func _unhandled_input(event):
 
 		# Always release scoop cursor if scoop tool is active
 		var current_tool = ToolManager.current_tool
-		if current_tool == ToolManager.Tool.SCOOP || current_tool == ToolManager.Tool.SCOOP_BOBA:
+		if current_tool != ToolManager.Tool.NONE:
 			ToolManager.scoop_release()

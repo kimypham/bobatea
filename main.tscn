@@ -9,27 +9,31 @@
 [node name="Main" type="Node"]
 
 [node name="Cup" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(94, 549)
+position = Vector2(753, 554)
 
-[node name="Container" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(855, 188)
+[node name="ContainerPearl" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(933, 188)
 
 [node name="ToolManager" type="Node" parent="."]
 script = ExtResource("4_1bvp3")
 
 [node name="Cup2" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(248, 552)
+position = Vector2(907, 557)
 
 [node name="Cup3" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(410, 550)
+position = Vector2(1069, 555)
 
 [node name="ScoopHome" parent="." instance=ExtResource("5_lquwl")]
 visible = false
 position = Vector2(885, 303)
 
 [node name="Shaker" parent="." instance=ExtResource("5_272bh")]
-position = Vector2(425, 298)
+position = Vector2(94, 502)
 
-[node name="Shaker2" parent="." instance=ExtResource("5_272bh")]
-position = Vector2(576, 261)
-cup_size = "large"
+[node name="ShakerLarge" parent="." instance=ExtResource("5_272bh")]
+position = Vector2(256, 478)
+shaker_size = "large"
+
+[node name="ContainerIce" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(249, 79)
+contains = "ice"
