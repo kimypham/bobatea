@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dneyoanlmecqq"]
+[gd_scene load_steps=8 format=3 uid="uid://dneyoanlmecqq"]
 
 [ext_resource type="PackedScene" uid="uid://vlmr0j1ad5u8" path="res://cup.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://c4wqtd8g2jel5" path="res://container.tscn" id="2_0xm2m"]
@@ -6,24 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://clg65vd208ch1" path="res://shaker.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://jkmymv51iir3" path="res://scoop_home.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bxxpx6twfulea" path="res://machine.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://b3fxjrtwf34e7" path="res://generate_cup.tscn" id="7_272bh"]
 
 [node name="Main" type="Node"]
 
 [node name="Cup" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(753, 554)
+visible = false
+cup_size = "large"
 
 [node name="ContainerPearl" parent="." instance=ExtResource("2_0xm2m")]
 z_index = -1
-position = Vector2(933, 188)
+position = Vector2(756, 186)
 
 [node name="ToolManager" type="Node" parent="."]
 script = ExtResource("4_1bvp3")
-
-[node name="Cup2" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(907, 557)
-
-[node name="Cup3" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(1069, 555)
 
 [node name="ScoopHome" parent="." instance=ExtResource("5_lquwl")]
 visible = false
@@ -47,3 +43,10 @@ contains = "ice"
 [node name="Machine" parent="." instance=ExtResource("6_7mycd")]
 z_index = -1
 position = Vector2(587, 171)
+
+[node name="GenerateCup" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(918, 183)
+
+[node name="GenerateCupLarge" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(1047, 146)
+cup_size = "large"

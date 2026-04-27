@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3fxjrtwf34e7"]
+
+[ext_resource type="Script" uid="uid://bcaw6oyvbucc6" path="res://generate_cup.gd" id="1_d5ilg"]
+[ext_resource type="Script" uid="uid://vha74w1et0b0" path="res://hitbox.gd" id="2_1gewj"]
+[ext_resource type="Texture2D" uid="uid://dxfptfof5ajss" path="res://art/cup-generator-medium.png" id="2_d5ilg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5ilg"]
+size = Vector2(122, 162)
+
+[node name="GenerateCup" type="Node2D"]
+script = ExtResource("1_d5ilg")
+
+[node name="GenerateCupSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_d5ilg")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("2_1gewj")
+
+[node name="GenerateCupHitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_d5ilg")
