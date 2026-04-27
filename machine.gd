@@ -16,12 +16,17 @@ func _ready():
 
 func _on_clicked():
 	is_pouring = true
-	print("is pouring")
 
 func _process(delta):
 	if is_pouring:
 		pour_height = min(pour_height + POUR_SPEED * delta, POUR_MAX_HEIGHT)
 		queue_redraw()
+		
+		# Notify the snapped shaker every frame while pouring
+		var snap_point = $SnapPoint
+		for child in get_tree().get_nodes_in_group("shakers"):
+			if child.is_snapped and child.snap_target == self:
+				child.receive_liquid(delta)
 
 func _draw():
 	if is_pouring or pour_height > 0:

@@ -30,6 +30,7 @@ visible = false
 position = Vector2(885, 303)
 
 [node name="Shaker" parent="." node_paths=PackedStringArray("snap_target") instance=ExtResource("5_272bh")]
+visible = false
 position = Vector2(94, 502)
 snap_target = NodePath("../Machine")
 

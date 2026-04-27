@@ -1,14 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://clg65vd208ch1"]
+[gd_scene load_steps=6 format=3 uid="uid://clg65vd208ch1"]
 
 [ext_resource type="Script" uid="uid://dbu0h1tfhla21" path="res://shaker.gd" id="1_dkk0w"]
 [ext_resource type="Texture2D" uid="uid://pyam43rmmigv" path="res://art/shaker-small.png" id="1_tqtt2"]
 [ext_resource type="Script" uid="uid://vha74w1et0b0" path="res://hitbox.gd" id="2_kwwks"]
+[ext_resource type="Texture2D" uid="uid://dtdsh7c7md3xj" path="res://art/shaker-large-tea.png" id="4_1s5xa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dkk0w"]
 size = Vector2(149.5, 368)
 
 [node name="Shaker" type="Node2D"]
 script = ExtResource("1_dkk0w")
+
+[node name="LiquidSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_1s5xa")
+
+[node name="LiquidSpriteTransparent" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.490196)
+texture = ExtResource("4_1s5xa")
 
 [node name="ShakerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_tqtt2")

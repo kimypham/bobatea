@@ -3,6 +3,8 @@ extends Node2D
 @onready var sprite = $ShakerSprite
 @onready var hitbox = $Hitbox
 @onready var hitbox_shape = $Hitbox/ShakerHitbox
+@onready var liquid_sprite = $LiquidSprite
+@onready var liquid_sprite_transparent = $LiquidSpriteTransparent
 
 @export var shaker_size: String = "regular"
 
@@ -38,8 +40,14 @@ const base_y_large = 125
 var snap_radius := 80.0                  # how close before it snaps (pixels)
 var is_snapped := false
 
+var liquid_fill := 0.0          # 0.0 to 1.0
+const FILL_SPEED := 0.15        # how fast it fills per second
 
 func _ready():
+	add_to_group("shakers")
+	liquid_sprite.visible = false
+	liquid_sprite_transparent.visible = false
+	
 	var shape = hitbox_shape.shape.duplicate()
 	hitbox_shape.shape = shape
 	match shaker_size:
@@ -114,8 +122,26 @@ func _add_scoop(ingredient: String):
 		base_y_based_on_size = base_y_large
 	new_sprite.position = Vector2(0, base_y_based_on_size - count * spacing_y)
 	add_child(new_sprite)
-	move_child(new_sprite, 0)
+	move_child(new_sprite, 1)
 	
 	if not ingredient_scoops.has(ingredient):
 		ingredient_scoops[ingredient] = []
 	ingredient_scoops[ingredient].append(new_sprite)
+	
+func receive_liquid(delta: float):
+	liquid_fill = min(liquid_fill + FILL_SPEED * delta, 1.0)
+	liquid_sprite.visible = true
+	liquid_sprite_transparent.visible = true
+	
+	var tex_size = liquid_sprite.texture.get_size()
+	var fill_height = tex_size.y * liquid_fill
+	var y_offset = tex_size.y - fill_height  # how much to crop from the top
+	
+	liquid_sprite.region_enabled = true
+	liquid_sprite.region_rect = Rect2(0, y_offset, tex_size.x, fill_height)
+	liquid_sprite.offset = Vector2(0, y_offset / 2.0)
+	
+	# repeat the same for transparent to make ingredients look submerged
+	liquid_sprite_transparent.region_enabled = true
+	liquid_sprite_transparent.region_rect = Rect2(0, y_offset, tex_size.x, fill_height)
+	liquid_sprite_transparent.offset = Vector2(0, y_offset / 2.0)
